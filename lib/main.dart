@@ -22,7 +22,7 @@ class DetailScreen extends StatelessWidget {
   }
 }
 
-class DetailScreen extends StatefulWidget {
+class MyHomePage extends StatefulWidget {
   const DetailScreen({super.key});
 
   @override
