@@ -1,167 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:wisata_candi_wasilah/data/candi_data.dart';
+import 'package:wisata_candi_wasilah/screens/profile_screen.dart';
+import 'package:wisata_candi_wasilah/screens/detail_screen.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
-
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+void main() {
+  runApp(const MyApp());
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
-  // TODO: 1. Deklarasi varaibel yang dibutuhkan
-  bool isSignedIn = false;
-  String fullName = '';
-  String userName = '';
-  int favoriteCandiCount = 0;
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-  // TODO: 5. Implementasi fungsi sigin
-  // implemntasi menggunakan fungsi setState untuk mengasikan nilai isSignedIn
-  void signIn() {
-    setState(() {
-      isSignedIn = !isSignedIn;
-    });
-  }
-
-  // TODO: 6. Implementasi fungsi SignOut
-  void signOut() {
-    setState(() {
-      isSignedIn = !isSignedIn;
-    });
-  }
-
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            height: 200,
-            width: double.infinity,
-            color: Colors.deepPurple,
-          ),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                // TODO: 2. Buat bagian ProfileHeader yang berisi gambar profil
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 200 - 50),
-                    child: Stack(
-                      alignment: Alignment.bottomRight,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.deepPurple,
-                              width: 2,
-                            ),
-                            shape: BoxShape.circle,
-                          ),
-                          child: CircleAvatar(
-                            radius: 50,
-                            backgroundImage: AssetImage(
-                              'images/placeholder_image.png',
-                            ),
-                          ),
-                        ),
-                        if (isSignedIn)
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.camera_alt,
-                              color: Colors.deepPurple[50],
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                // TODO: 3. Buat bagian ProfileInfor yang berisi info profil
-                SizedBox(height: 20),
-                Divider(color: Colors.deepPurple[100]),
-                SizedBox(height: 4),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Row(
-                        children: [
-                          Icon(Icons.lock, color: Colors.amber),
-                          SizedBox(
-                            width: 8,
-                          ), // memberikan jarak dengan text dan text
-                          Text(
-                            'Pengguna',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Memasukkan nilai dari username
-                    Expanded(
-                      child: Text(
-                        ': $userName',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 4),
-                Divider(color: Colors.deepPurple[100]),
-                SizedBox(height: 4),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Row(
-                        children: [
-                          Icon(Icons.person, color: Colors.blue),
-                          SizedBox(
-                            width: 8,
-                          ), // memberikan jarak dengan text dan text
-                          Text(
-                            'Nama',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Memasukkan nilai dari username
-                    Expanded(
-                      child: Text(
-                        ': $fullName',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    // tambahkan kondisi untuk menampilkan icon edit jika isSIgnedIn bernilai true
-                    if (isSignedIn) Icon(Icons.edit),
-                  ],
-                ),
-                // TODO: 4. Buat ProfileActions yang berisi TextButton sign in/out
-                // Buat jarak pembatas dengan profile info masing masing 4 dan 20
-                SizedBox(height: 4),
-                Divider(color: Colors.deepPurple[100]),
-                SizedBox(height: 20),
-                // periksa nilai isSignedIn jika true tampil  sign out dan false Sign in
-                // fungsi (){} untuk sementara dibuat anonimous function
-                isSignedIn
-                    ? TextButton(onPressed: signOut, child: Text('Sign Out'))
-                    : TextButton(onPressed: signIn, child: Text('Sign In')),
-              ],
-            ),
-          ),
-        ],
+    return MaterialApp(
+      title: 'Wisata Candi',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
+      // Disini tempaty menampilkan emulator nanti dia mau nampilkan bagain screen mana gitu
+      // home: ProfileScreen(),
+      home: DetailScreen(candi : candiList[0]),
     );
   }
 }
