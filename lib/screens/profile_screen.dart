@@ -147,12 +147,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     if (isSignedIn) Icon(Icons.edit),
                   ],
                 ),
-                // TODO: 4. Buat ProfileActions yang berisi TextButton sign in/out
-                // Buat jarak pembatas dengan profile info masing masing 4 dan 20
+                // menambahkan favorit
                 SizedBox(height: 4),
                 Divider(color: Colors.deepPurple[100]),
-                SizedBox(height: 20),
-                // Ini menambahkan favorit
+                SizedBox(height: 4),
                 Row(
                   children: [
                     SizedBox(
@@ -182,6 +180,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ],
                 ),
+
+                // TODO: 4. Buat ProfileActions yang berisi TextButton sign in/out
+                // Buat jarak pembatas dengan profile info masing masing 4 dan 20
+                SizedBox(height: 4),
+                Divider(color: Colors.deepPurple[100]),
+                SizedBox(height: 20),
                 // periksa nilai isSignedIn jika true tampil  sign out dan false Sign in
                 // fungsi (){} untuk sementara dibuat anonimous function
                 isSignedIn

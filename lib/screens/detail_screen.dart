@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:wisata_candi_wasilah/models/candi.dart';
+import 'package:wisata_candi_wasilah_maulia/models/candi.dart';
 
 class DetailScreen extends StatelessWidget {
   final Candi candi;
@@ -28,6 +28,7 @@ class DetailScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   //tombol back custom
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),//EdgeInsets.symmetric
@@ -46,6 +47,7 @@ class DetailScreen extends StatelessWidget {
                   )
                 ],
               ),
+
               //DetailInfo
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -53,6 +55,7 @@ class DetailScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 16,),
+
                     //info atas (nama candi dan tombol favorit
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,6 +72,7 @@ class DetailScreen extends StatelessWidget {
                         )
                       ],
                     ),
+
                     //info tengah (lokasi, dibangun, tipe)
                     SizedBox(height: 16,),
                     Row(children: [
@@ -98,6 +102,7 @@ class DetailScreen extends StatelessWidget {
                     SizedBox(height: 16,),
                     Divider(color: Colors.deepPurple.shade100,),
                     SizedBox(height: 16,),
+
                     //info bawah (deskripsi)
                     const Text(
                       'Deskripsi',
@@ -111,6 +116,7 @@ class DetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
+
               //DetailGallery
               Padding(
                 padding: const EdgeInsets.all(15),
