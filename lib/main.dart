@@ -1,75 +1,167 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const DetailScreen());
-}
-
-class DetailScreen extends StatelessWidget {
-  const DetailScreen({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Wisata Candi',
-      theme: ThemeData(
-
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: DetailScreen(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const DetailScreen({super.key});
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context){
-    return const Placeholder();
-  }
+  State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _ProfileScreenState extends State<ProfileScreen> {
+  // TODO: 1. Deklarasi varaibel yang dibutuhkan
+  bool isSignedIn = false;
+  String fullName = '';
+  String userName = '';
+  int favoriteCandiCount = 0;
 
-  void _incrementCounter() {
+  // TODO: 5. Implementasi fungsi sigin
+  // implemntasi menggunakan fungsi setState untuk mengasikan nilai isSignedIn
+  void signIn() {
     setState(() {
+      isSignedIn = !isSignedIn;
+    });
+  }
 
-      _counter++;
+  // TODO: 6. Implementasi fungsi SignOut
+  void signOut() {
+    setState(() {
+      isSignedIn = !isSignedIn;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(
+      body: Stack(
+        children: [
+          Container(
+            height: 200,
+            width: double.infinity,
+            color: Colors.deepPurple,
+          ),
 
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                // TODO: 2. Buat bagian ProfileHeader yang berisi gambar profil
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 200 - 50),
+                    child: Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.deepPurple,
+                              width: 2,
+                            ),
+                            shape: BoxShape.circle,
+                          ),
+                          child: CircleAvatar(
+                            radius: 50,
+                            backgroundImage: AssetImage(
+                              'images/placeholder_image.png',
+                            ),
+                          ),
+                        ),
+                        if (isSignedIn)
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.camera_alt,
+                              color: Colors.deepPurple[50],
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
 
-        title: Text(widget.title),
-      ),
-      body: Center(
-
-        child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+                // TODO: 3. Buat bagian ProfileInfor yang berisi info profil
+                SizedBox(height: 20),
+                Divider(color: Colors.deepPurple[100]),
+                SizedBox(height: 4),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 3,
+                      child: Row(
+                        children: [
+                          Icon(Icons.lock, color: Colors.amber),
+                          SizedBox(
+                            width: 8,
+                          ), // memberikan jarak dengan text dan text
+                          Text(
+                            'Pengguna',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Memasukkan nilai dari username
+                    Expanded(
+                      child: Text(
+                        ': $userName',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 4),
+                Divider(color: Colors.deepPurple[100]),
+                SizedBox(height: 4),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 3,
+                      child: Row(
+                        children: [
+                          Icon(Icons.person, color: Colors.blue),
+                          SizedBox(
+                            width: 8,
+                          ), // memberikan jarak dengan text dan text
+                          Text(
+                            'Nama',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Memasukkan nilai dari username
+                    Expanded(
+                      child: Text(
+                        ': $fullName',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    // tambahkan kondisi untuk menampilkan icon edit jika isSIgnedIn bernilai true
+                    if (isSignedIn) Icon(Icons.edit),
+                  ],
+                ),
+                // TODO: 4. Buat ProfileActions yang berisi TextButton sign in/out
+                // Buat jarak pembatas dengan profile info masing masing 4 dan 20
+                SizedBox(height: 4),
+                Divider(color: Colors.deepPurple[100]),
+                SizedBox(height: 20),
+                // periksa nilai isSignedIn jika true tampil  sign out dan false Sign in
+                // fungsi (){} untuk sementara dibuat anonimous function
+                isSignedIn
+                    ? TextButton(onPressed: signOut, child: Text('Sign Out'))
+                    : TextButton(onPressed: signIn, child: Text('Sign In')),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
