@@ -3,6 +3,7 @@ import 'package:wisata_candi_wasilah_maulia/data/candi_data.dart';
 import 'package:wisata_candi_wasilah_maulia/screens/profile_screen.dart';
 import 'package:wisata_candi_wasilah_maulia/screens/detail_screen.dart';
 import 'package:wisata_candi_wasilah_maulia/screens/sign_in_screen.dart';
+import 'package:wisata_candi_wasilah_maulia/screens/sign_up_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
       // menampilkan profil/menjalankan halaman
       // home: ProfileScreen(),
       // home: DetailScreen(candi : candiList[0]),
-      home: SignInScreen(),
+      // home: SignInScreen(),
+      home: SignUpScreen()
     );
   }
 }

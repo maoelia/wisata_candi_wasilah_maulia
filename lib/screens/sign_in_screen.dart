@@ -56,11 +56,11 @@ class _SignInScreenState extends State<SignInScreen> {
                     suffixIcon: IconButton(
                         onPressed: (){
                           setState(() {
-                            _obscurePassword = !_obscurePassword;
+                            _obscurePassword = !_obscurePassword; //menyembunyikan kata sandi
                           });
                         },
                         icon: Icon(
-                          _obscurePassword ? Icons.visibility_off
+                          _obscurePassword ? Icons.visibility_off //icon mata buka tutup
                               : Icons.visibility,
                         ),),
                   ),
