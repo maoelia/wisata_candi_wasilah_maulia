@@ -14,12 +14,12 @@ class _SearchScreenState extends State<SearchScreen> {
   List<Candi> _filteredCandis = candiList;
   String _searchQuery = '';
   final TextEditingController _editingController = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //TODO: 2. Buat appbar dengan judul pencaria candi
-      appBar: AppBar(title: Text('Pencarian Candi'),),
+      appBar: AppBar(title: Text('Pencarian Candi')),
       //TODO: 3. Buat body berupa colum
       body: Column(
         children: [
@@ -29,21 +29,26 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                color: Colors.deepPurple[50],),
-              child: TextField(autofocus: false,
+                color: Colors.deepPurple[50],
+              ),
+              child: TextField(
+                autofocus: false,
                 //TODO: 6. Implementasi fitur pencarian
                 decoration: InputDecoration(
-                hintText: 'Cari Candi...',
-                prefixIcon: Icon(Icons.search),
-                //TODO: 7. Implementasi pengosongan input
-                border: InputBorder.none,
-                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.deepPurple)),
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12
-                )
-              ),),
-            ),S
+                  hintText: 'Cari Candi...',
+                  prefixIcon: Icon(Icons.search),
+                  //TODO: 7. Implementasi pengosongan input
+                  border: InputBorder.none,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepPurple),
+                  ),
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 12,
+                  ),
+                ),
+              ),
+            ),
           ),
 
           //TODO: 5. Buat listview hasil pencarian sebagai anak dari column
@@ -53,10 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
               itemBuilder: (context, index) {
                 final candi = _filteredCandis[index];
                 return Card(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 4
-                  ),
+                  margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start, //buat scroll
                     children: [
@@ -80,24 +82,21 @@ class _SearchScreenState extends State<SearchScreen> {
                             Text(
                               candi.name,
                               style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold
-                                  ),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                            SizedBox(
-                              height: 4,
-                            ),
-                            Text(candi.location,
-                            ),
+                            SizedBox(height: 4),
+                            Text(candi.location),
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ),
                 );
-              }
+              },
             ),
-          )
+          ),
         ],
       ),
     );

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wisata_candi_wasilah_maulia/data/candi_data.dart';
+import 'package:wisata_candi_wasilah_maulia/screens/home_screen.dart';
 import 'package:wisata_candi_wasilah_maulia/screens/profile_screen.dart';
 import 'package:wisata_candi_wasilah_maulia/screens/detail_screen.dart';
 import 'package:wisata_candi_wasilah_maulia/screens/sign_in_screen.dart';
 import 'package:wisata_candi_wasilah_maulia/screens/sign_up_screen.dart';
 import 'package:wisata_candi_wasilah_maulia/screens/search_screen.dart';
+import 'package:wisata_candi_wasilah_maulia/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,11 +30,9 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        colorScheme:
-        ColorScheme.fromSeed(seedColor: Colors.deepPurple).copyWith(
-          primary: Colors.deepPurple,
-          surface: Colors.deepPurple[50],
-        ),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+        ).copyWith(primary: Colors.deepPurple, surface: Colors.deepPurple[50]),
         useMaterial3: true,
       ),
 
@@ -41,7 +41,8 @@ class MyApp extends StatelessWidget {
       // home: DetailScreen(candi : candiList[0]),
       // home: SignInScreen(),
       // home: SignUpScreen(),
-      home: SearchScreen(),
+      // home: SearchScreen(),
+      // home: HomeScreen(),
     );
   }
 }
