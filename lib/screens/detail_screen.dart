@@ -13,6 +13,7 @@ class DetailScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              //Detail Header
               Stack(
                 children: [
                   //image utama
@@ -31,14 +32,18 @@ class DetailScreen extends StatelessWidget {
 
                   //tombol back custom
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),//EdgeInsets.symmetric
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 32),//EdgeInsets.symmetric
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.deepPurple[100]?.withOpacity(0.8),
                         shape: BoxShape.circle,
                       ),
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                         icon: const Icon(
                           Icons.arrow_back,
                         ),
@@ -77,42 +82,54 @@ class DetailScreen extends StatelessWidget {
                     SizedBox(height: 16,),
                     Row(children: [
                       Icon(Icons.place, color: Colors.red,),
-                      SizedBox(width: 8,),
-                      SizedBox(width: 78,
+                      SizedBox(width: 8),
+                      SizedBox(width: 70,
                         child: Text('Lokasi', style: TextStyle(
                             fontWeight: FontWeight.bold),),),
                       Text(': ${candi.location}',),
                     ],),
                     Row(children: [
                       Icon(Icons.calendar_month, color: Colors.red,),
-                      SizedBox(width: 8,),
-                      SizedBox(width: 78,
+                      SizedBox(width: 8),
+                      SizedBox(width: 70,
                         child: Text('Dibangun', style: TextStyle(
                             fontWeight: FontWeight.bold),),),
                       Text(': ${candi.built}',),
                     ],),
                     Row(children: [
                       Icon(Icons.house, color: Colors.red,),
-                      SizedBox(width: 8,),
-                      SizedBox(width: 78,
+                      SizedBox(width: 8),
+                      SizedBox(width: 70,
                         child: Text('Tipe', style: TextStyle(
                             fontWeight: FontWeight.bold),),),
                       Text(': ${candi.type}',),
                     ],),
-                    SizedBox(height: 16,),
+                    SizedBox(height: 16),
                     Divider(color: Colors.deepPurple.shade100,),
                     SizedBox(height: 16,),
 
                     //info bawah (deskripsi)
-                    const Text(
-                      'Deskripsi',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Deskripsi',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 6),
+                          Text(
+                            candi.description,
+                            style: TextStyle(fontSize: 14, color: Colors.black87),
+                          ),
+                          SizedBox(height: 16),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 8.0,),
-                    Text(candi.description),
                   ],
                 ),
               ),
@@ -135,7 +152,7 @@ class DetailScreen extends StatelessWidget {
                         itemCount: candi.imageUrls.length,
                         itemBuilder: (context, index){
                           return Padding(
-                            padding: EdgeInsets.only(right: 8),
+                            padding: EdgeInsets.only(left: 8),
                             child: GestureDetector(
                               onTap: () {},
                               child: Container(

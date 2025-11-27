@@ -9,7 +9,6 @@ import 'package:wisata_candi_wasilah_maulia/data/candi_data.dart';
 import 'package:wisata_candi_wasilah_maulia/screens/detail_screen.dart';
 import 'widgets/profile_info_item.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -39,17 +38,23 @@ class MyApp extends StatelessWidget {
           ),
           useMaterial3: true,
         ),
-        // initialRoute: '/',
-        // routes: {
-        //   '/homescreen': (context) => const MainScreen(),
-        //   '/signin': (context) => const SignInScreen(),
-        //   '/signup': (context) => const SignUpScreen(),
-        // }
-        home: const MainScreen(),
+        // home: ProfileScreen(),
+        //home: DetailScreen(candi : candiList[0]),
+        // home: SignInScreen(),
+        //home: SignUpScreen(),
+        // home: SearchScreen(),
+        // home: HomeScreen(),
+
+        initialRoute: '/homescreen',
         routes: {
+          '/homescreen': (context) => const MainScreen(),
           '/signin': (context) => const SignInScreen(),
           '/signup': (context) => const SignUpScreen(),
-        },
+        }
+        // home: const MainScreen(),
+        // routes: {
+        //   '/signin': (context) => const SignInScreen(),
+        //   '/signup': (context) => const SignUpScreen(),
     );
   }
 }
@@ -75,9 +80,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       //   TODO: 2. Buat properti body berupa widget yang ditampilkan
-      body: _children[
-      _currentIndex
-      ],
+      body: _children[_currentIndex],
       //   TODO: 3. Buat properti bottomNavigationBar dengan nilai Theme
       bottomNavigationBar: Theme(
         //   TODO: 4. Buat data dan child dari Theme

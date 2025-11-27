@@ -16,9 +16,7 @@ class _SignInScreenState extends State<SignInScreen> {
     final TextEditingController _passwordController = TextEditingController();
 
     String _erorText = '';
-
     bool _isSignedIn = false;
-
     bool _obscurePassword = true;
 
     @override
@@ -33,18 +31,21 @@ class _SignInScreenState extends State<SignInScreen> {
               padding: const EdgeInsets.all(16),
                 child: Form(
                   child: Column(
-                  // TODO: 4. Atur mainAxisAligment dan crossAxisAligment
+
+                    // TODO: 4. Atur mainAxisAligment dan crossAxisAligment
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+
                 //TODO: 5. Pasang TextFromField Nama Pengguna
-                TextFormField(
+                TextField(
                   controller: _usernameController,
                   decoration: InputDecoration(
                     labelText: "Nama Pengguna",
                     border: OutlineInputBorder(),
                   ),
                 ),
+
                 //TODO: 6. Pasang TextFromField Kata Sandi
                 SizedBox(height: 28),
                 TextFormField(
@@ -66,6 +67,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   obscureText: _obscurePassword,
                 ),
+
                 //TODO: 7. Pasang ElevatedButton Sign In
                 SizedBox(height: 20),
                 ElevatedButton(
@@ -76,6 +78,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 // TextButton(
                 //     onPressed: (){},
                 //     child: Text('Belum punya akun? Daftar di sini.'))
+
                 RichText(
                     text: TextSpan(
                       text: 'Belum punya akun?',
@@ -88,6 +91,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             decoration: TextDecoration.underline,
                             fontSize: 16
                           ), //textstyle
+
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {},
                         ),

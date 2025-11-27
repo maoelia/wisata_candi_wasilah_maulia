@@ -30,6 +30,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     });
   }
 
+  void onEditPressed() {
+    debugPrint('Icon edit ditekan...');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,101 +89,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(height: 20),
                 Divider(color: Colors.deepPurple[100]),
                 SizedBox(height: 4),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Row(
-                        children: [
-                          Icon(Icons.lock, color: Colors.amber),
-                          SizedBox(
-                            width: 8,
-                          ), // memberikan jarak dengan text dan text
-                          Text(
-                            'Pengguna',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Memasukkan nilai dari username
-                    Expanded(
-                      child: Text(
-                        ': $userName',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                  ],
+
+                // profileinfoitem
+                ProfileInfoItem(
+                  icon: Icons.lock,
+                  label: 'Pengguna',
+                  value: userName,
+                  iconColor: Colors.amber,
                 ),
+
                 SizedBox(height: 4),
                 Divider(color: Colors.deepPurple[100]),
                 SizedBox(height: 4),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Row(
-                        children: [
-                          Icon(Icons.person, color: Colors.blue),
-                          SizedBox(
-                            width: 8,
-                          ), // memberikan jarak dengan text dan text
-                          Text(
-                            'Nama',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Memasukkan nilai dari username
-                    Expanded(
-                      child: Text(
-                        ': $fullName',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    // tambahkan kondisi untuk menampilkan icon edit jika isSIgnedIn bernilai true
-                    if (isSignedIn) Icon(Icons.edit),
-                  ],
+
+                ProfileInfoItem(
+                  icon: Icons.person,
+                  label: 'Nama',
+                  value: fullName,
+                  showEditIcon: isSignedIn,
+                  onEditPressed: () {
+                    debugPrint('Icon Edit ditekan...');
+                  },
+                  iconColor: Colors.blue,
                 ),
-                // menambahkan favorit
+
                 SizedBox(height: 4),
                 Divider(color: Colors.deepPurple[100]),
                 SizedBox(height: 4),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Row(
-                        children: [
-                          Icon(Icons.favorite, color: Colors.red),
-                          SizedBox(
-                            width: 8,
-                          ), // memberikan jarak dengan text dan text
-                          Text(
-                            'Favorit',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    // Memasukkan nilai dari username
-                    Expanded(
-                      child: Text(
-                        ': $favoriteCandiCount',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                  ],
+                ProfileInfoItem(
+                  icon: Icons.favorite,
+                  label: 'Favorit',
+                  value: favoriteCandiCount > 0 ? '$favoriteCandiCount' : '',
+                  iconColor: Colors.red,
                 ),
 
                 // TODO: 4. Buat ProfileActions yang berisi TextButton sign in/out
@@ -187,6 +128,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(height: 4),
                 Divider(color: Colors.deepPurple[100]),
                 SizedBox(height: 20),
+
                 // periksa nilai isSignedIn jika true tampil  sign out dan false Sign in
                 // fungsi (){} untuk sementara dibuat anonimous function
                 isSignedIn

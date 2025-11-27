@@ -12,13 +12,11 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   // TODO: 1. Deklarasikan variabel
   final TextEditingController _usernameController = TextEditingController();
-
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _namalengkap = TextEditingController();
 
   String _erorText = '';
-
   bool _isSignedIn = false;
-
   bool _obscurePassword = true;
 
   @override
@@ -46,6 +44,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       border: OutlineInputBorder(),
                     ),
                   ),
+
                   //TODO: 6. Pasang TextFromField Nama Pengguna
                   SizedBox(height: 28),
                   TextFormField(
@@ -55,6 +54,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       border: OutlineInputBorder(),
                     ),
                   ),
+
                   //TODO: 7. Pasang TextFromField Kata Sandi
                   SizedBox(height: 28),
                   TextFormField(
@@ -70,9 +70,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           });
                         },
                         icon: Icon(
-                          _obscurePassword ? Icons.visibility_off //icon mata buka tutup
+                          _obscurePassword
+                              ? Icons.visibility_off //icon mata buka tutup
                               : Icons.visibility,
-                        ),),
+                        ),
+                      ),
                     ),
                     obscureText: _obscurePassword,
                   ),
