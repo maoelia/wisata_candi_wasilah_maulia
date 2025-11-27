@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:wisata_candi_wasilah_maulia/models/candi.dart';
+import 'package:wisata_candi_wasilah_maulia/screens/detail_screen.dart';
+import 'package:wisata_candi_wasilah_maulia/data/candi_data.dart';
+
+// contoh list favorit (kalau kamu belum pakai provider)
+List<Candi> favorites = candiList;
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
@@ -10,7 +16,6 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Favorites'),
@@ -70,11 +75,13 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(width: 150),
+                  const Spacer(),
                   IconButton(
                     icon: const Icon(Icons.favorite, color: Colors.red),
                     onPressed: () {
-                      favoritesProvider.removeFavorite(candi);
+                      setState(() {
+                        favorites.remove(candi);
+                      });
                     },
                   ),
                 ],

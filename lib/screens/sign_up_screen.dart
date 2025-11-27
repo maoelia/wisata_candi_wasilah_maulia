@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wisata_candi/screens/sign_in_screen.dart';
+import 'package:wisata_candi_wasilah_maulia/screens/sign_in_screen.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 
 class SignUpScreen extends StatefulWidget {

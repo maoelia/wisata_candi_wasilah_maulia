@@ -7,6 +7,7 @@ import 'package:wisata_candi_wasilah_maulia/screens/sign_up_screen.dart';
 import 'package:wisata_candi_wasilah_maulia/screens/sign_in_screen.dart';
 import 'package:wisata_candi_wasilah_maulia/data/candi_data.dart';
 import 'package:wisata_candi_wasilah_maulia/screens/detail_screen.dart';
+import 'package:wisata_candi_wasilah_maulia/models/candi.dart';
 import 'widgets/profile_info_item.dart';
 
 void main() {
@@ -45,10 +46,9 @@ class MyApp extends StatelessWidget {
         // home: SearchScreen(),
         // home: HomeScreen(),
 
-        home: MainScreen,
         initialRoute: '/',
         routes: {
-          '/homescreen': (context) => const MainScreen(),
+          '/': (context) => const HomeScreen(),
           '/signin': (context) => SignInScreen(),
           '/signup': (context) => SignUpScreen(),
         },

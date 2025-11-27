@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wisata_candi_wasilah_maulia/models/candi.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   final Candi candi;
 
   const DetailScreen({super.key, required this.candi});
@@ -20,12 +20,12 @@ class _DetailScreenState extends State<DetailScreen> {
   void initState(){
     super.initState();
     _checkSignInStatus(); // Memeriksa status sign in saat layar dibuat
-    _loudFavoriteStatus(); // Memeriksa status favorite saat layar dibuat
+    _loadFavoriteStatus(); // Memeriksa status favorite saat layar dibuat
   }
 
   //Memeriksa status sign in
   void _checkSignInStatus() async {
-    SharedPreferences prefs = await SharedPreFerences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     bool signIn = prefs.getBool('isSignIn') ?? false;
     setState(() {
       isSignedIn;
@@ -33,7 +33,7 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   //Memeriksa status favorite
-  void _loudFavoriteStatus() async {
+  void _loadFavoriteStatus() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool favorite = prefs.getBool('favorite_${widget.candi.name}') ?? false;
     setState(() {
