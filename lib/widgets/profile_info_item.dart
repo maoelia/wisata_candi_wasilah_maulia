@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ProfileInfoItem extends StatelessWidget {
-
   // deklarasikan variabel yang dibutuhkan
   final IconData icon;
   final String label;
@@ -23,25 +22,30 @@ class ProfileInfoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width/3,
-            child: Row(
-              children: [
-                Icon(icon, color: iconColor), // gunakan variabel warna ikon
-                SizedBox(width: 8),
-                Text(
-                  label,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width / 3,
+          child: Row(
+            children: [
+              //icon
+              Icon(icon, color: iconColor), // gunakan variabel warna icon
+              SizedBox(width: 8),
+              Text(
+                label,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              )
+            ],
           ),
-          Expanded(
-            child: Text(': $value', style: TextStyle(fontSize: 18)),
-          ),
-          if (showEditIcon) InkWell(onTap: onEditPressed, child: Icon(Icons.edit),)
-          ],
-        );
-    }
+        ),
+        Expanded(
+          child: Text(': $value', style: TextStyle(fontSize: 18)),
+        ),
+        if (showEditIcon)
+          InkWell(
+            onTap: onEditPressed,
+            child: Icon(Icons.edit),
+          )
+      ],
+    );
+  }
 }

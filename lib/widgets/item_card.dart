@@ -6,19 +6,23 @@ class ItemCard extends StatelessWidget {
   //TODO: 1. Deklarasikan variabel yang dibutuhkan dan pasang pada konstruktor
   final Candi candi;
 
-  const ItemCard({super.key, required this.candi,});
+  const ItemCard({
+    super.key,
+    required this.candi,
+  });
 
   @override
   Widget build(BuildContext context) {
     //TODO: 6. Implementasi routing ke DetailScreen
     return InkWell(
-    onTap: () {
-      Navigator.push(context,
+      onTap: () {
+        Navigator.push(
+          context,
           MaterialPageRoute(
-              builder: (context) => DetailScreen(candi: candi),
+            builder: (context) => DetailScreen(candi: candi),
           ),
-      );
-    },
+        );
+      },
       child: Card(
         // TODO: 2. Tetapkan parameter shape, margin, dan elevation dari Cari
         shape: RoundedRectangleBorder(
@@ -33,7 +37,7 @@ class ItemCard extends StatelessWidget {
             Expanded(
               //TODO: 7. Implementasi hero animation
               child: ClipRRect(
-                borderRadius: BorderRadiusGeometry.circular(15),
+                borderRadius: BorderRadius.circular(15),
                 child: Image.asset(
                   candi.imageAsset,
                   width: double.infinity,
@@ -43,18 +47,20 @@ class ItemCard extends StatelessWidget {
             ),
             //TODO: 4. Buat Text sebagai anak dari column
             Padding(
-                  padding: EdgeInsets.only(left: 16, top: 8),
-                  child: Text(candi.name,
-                    style: TextStyle(
-                      fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                  ),
+              padding: EdgeInsets.only(left: 16, top: 8),
+              child: Text(
+                candi.name,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
                 ),
+              ),
+            ),
             //TODO: 5. Buat Text sebagai anak dari column
             Padding(
               padding: EdgeInsets.only(left: 16, top: 8),
-              child: Text(candi.type,
+              child: Text(
+                candi.type,
                 style: TextStyle(
                   fontSize: 12,
                 ),
@@ -62,9 +68,7 @@ class ItemCard extends StatelessWidget {
             ),
           ],
         ),
-       ),
+      ),
     );
   }
 }
-
-
