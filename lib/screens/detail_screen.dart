@@ -17,7 +17,7 @@ class _DetailScreenState extends State<DetailScreen> {
   bool isSignedIn = false;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _checkSignInStatus(); // Memeriksa status sign in saat layar dibuat
     _loadFavoriteStatus(); // Memeriksa status favorite saat layar dibuat
@@ -41,13 +41,13 @@ class _DetailScreenState extends State<DetailScreen> {
     });
   }
 
-  Future<void> _toggleFavorite() async{
+  Future<void> _toggleFavorite() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     //Memeriksa apakah pengguna sudah sign in
-    if (!isSignedIn){
+    if (!isSignedIn) {
       //jika belum sign in, arahkan ke SignInScreen
-      WidgetsBinding.instance.addPostFrameCallback((_){
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.pushReplacementNamed(context, '/signin');
       });
       return;
@@ -130,11 +130,12 @@ class _DetailScreenState extends State<DetailScreen> {
                           onPressed: () {
                             _toggleFavorite();
                           },
-                          icon: Icon(isSignedIn && isFavorite
-                              ? Icons.favorite
-                              : Icons.favorite_border,
-                            color: isSignedIn && isFavorite ? Colors.red : null,)
-                      )
+                          icon: Icon(
+                            isSignedIn && isFavorite
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: isSignedIn && isFavorite ? Colors.red : null,
+                          ))
                     ],
                   ),
                   // info tengah (lokasi, dibangun, tipe)
@@ -145,8 +146,11 @@ class _DetailScreenState extends State<DetailScreen> {
                       SizedBox(width: 8),
                       SizedBox(
                         width: 70,
-                        child: Text('Lokasi', style: TextStyle(
-                            fontWeight: FontWeight.bold),),),
+                        child: Text(
+                          'Lokasi',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
                       Text(': ${widget.candi.location}'),
                     ],
                   ),
@@ -154,19 +158,23 @@ class _DetailScreenState extends State<DetailScreen> {
                     children: [
                       Icon(Icons.calendar_month, color: Colors.blue),
                       SizedBox(width: 8),
-                      SizedBox(width: 70,
-                          child: Text('Dibangun', style: TextStyle(
-                              fontWeight: FontWeight.bold))),
+                      SizedBox(
+                          width: 70,
+                          child: Text('Dibangun',
+                              style: TextStyle(fontWeight: FontWeight.bold))),
                       Text(': ${widget.candi.built}'),
-                    ],),
-                  Row(children: [
-                    Icon(Icons.house, color: Colors.green),
-                    SizedBox(width:8),
-                    SizedBox(width:70,
-                        child: Text('Tipe', style: TextStyle(
-                            fontWeight: FontWeight.bold))),
-                    Text(': ${widget.candi.type}'),
-                  ],
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.house, color: Colors.green),
+                      SizedBox(width: 8),
+                      SizedBox(
+                          width: 70,
+                          child: Text('Tipe',
+                              style: TextStyle(fontWeight: FontWeight.bold))),
+                      Text(': ${widget.candi.type}'),
+                    ],
                   ),
                   SizedBox(height: 16),
                   Divider(color: Colors.deepPurple.shade100),
@@ -175,13 +183,16 @@ class _DetailScreenState extends State<DetailScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(width: 70,
+                      SizedBox(
+                          width: 70,
                           child: Text(
-                            'Deskripsi', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                          )
-                      ),
+                            'Deskripsi',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16),
+                          )),
                       SizedBox(height: 16),
-                      Text('${widget.candi.description}',textAlign: TextAlign.justify),
+                      Text('${widget.candi.description}',
+                          textAlign: TextAlign.justify),
                     ],
                   )
                 ],
@@ -193,29 +204,34 @@ class _DetailScreenState extends State<DetailScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Divider(color: Colors.deepPurple.shade100,),
-                  Text('Galeri', style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold
-                  ),),
-                  SizedBox(height: 10,),
+                  Divider(
+                    color: Colors.deepPurple.shade100,
+                  ),
+                  Text(
+                    'Galeri',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   SizedBox(
                     height: 100,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: widget.candi.imageUrls.length,
-                      itemBuilder: (context, index){
-                        return Padding(padding: EdgeInsets.only(right:8),
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.only(right: 8),
                           // bingkai
                           child: GestureDetector(
-                            onTap: (){},
+                            onTap: () {},
                             child: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12),
                                   border: Border.all(
                                     color: Colors.deepPurple.shade100,
                                     width: 2,
-                                  )
-                              ),
+                                  )),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: CachedNetworkImage(
@@ -223,12 +239,13 @@ class _DetailScreenState extends State<DetailScreen> {
                                   width: 120,
                                   height: 120,
                                   fit: BoxFit.cover,
-                                  placeholder: (context,url) => Container(
+                                  placeholder: (context, url) => Container(
                                     width: 120,
                                     height: 120,
                                     color: Colors.deepPurple[50],
                                   ),
-                                  errorWidget: (context, url, error) => Icon(Icons.error),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
                                 ),
                               ),
                             ),
@@ -237,10 +254,16 @@ class _DetailScreenState extends State<DetailScreen> {
                       },
                     ),
                   ),
-                  SizedBox(height: 4,),
-                  Text('Tap untuk memperbesar',style: TextStyle(
-                    fontSize: 12, color: Colors.black54,
-                  ),),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    'Tap untuk memperbesar',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.black54,
+                    ),
+                  ),
                 ],
               ),
             )
