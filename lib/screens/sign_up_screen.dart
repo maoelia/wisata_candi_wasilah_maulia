@@ -17,7 +17,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   String _errorText = '';
-  bool _isSignedIn = false;
   bool _obscurePassword = true;
 
   //TODO: 10.Membuat method _signUp
@@ -39,7 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return;
     }
 
-    //     TODO: 3. Jika name, username, password tidak kosong lakukan enkripsi
+    // TODO: 3. Jika name, username, password tidak kosong lakukan enkripsi
     if(name.isNotEmpty && username.isNotEmpty && password.isNotEmpty){
       final encrypt.Key key = encrypt.Key.fromLength(32);
       final iv = encrypt.IV.fromLength(16);
@@ -64,7 +63,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // TODO: 11. Membuat metode dispose
   @override
   void dispose() {
-    _nameController.dispose();
+    _fullnameController.dispose();
     _usernameController.dispose();
     _passwordController.dispose();
     super.dispose();
