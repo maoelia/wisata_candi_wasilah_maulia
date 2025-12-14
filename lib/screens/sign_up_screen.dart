@@ -19,7 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _isSignedIn = false;
   bool _obscurePassword = true;
 
-  //TODO: 1.Membuat method _signUp
+  //TODO: 10.Membuat method _signUp
   void _signUp() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String name = _fullnameController.text.trim();
@@ -38,13 +38,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return;
     }
 
+    //     TODO: 3. Jika name, username, password tidak kosong lakukan enkripsi
+    if(name.isNotEmpty && username.isNotEmpty && password.isNotEmpty){
+      final encrypt.Key key = encrypt.Key.fromLength(32);
+      final iv = encrypt.IV.fromLength(16);
+    }
+
+    final encrypter = encrypt.Encrypter(encrypt.AES(key));
+    final encryptedName = encrypter.encrypt(name, iv: iv);
+    final encryptedUsername = encrypter.encrypt(username, iv: iv);
+    final encryptedPassword = encrypter.encrypt(password, iv: iv);
+
     //simpan data pengguna di SharedPreferences
-    prefs.setString('fulname', name);
-    prefs.setString('username', username);
-    prefs.setString('password', password);
+    prefs.setString('fullname', encryptedName.base64);
+    prefs.setString('username', encryptedUsername.base64);
+    prefs.setString('password', encryptedPassword.base64);
+    prefs.setString('key', key.base64);
+    prefs.setString('iv', iv.base64);
 
     //buat navigasi ke SignInScreen
     Navigator.pushReplacementNamed(context, '/signin');
+  }
+
+  // TODO: 11. Membuat metode dispose
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -54,23 +76,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
       appBar: AppBar(
         title: Text('Sign Up'),
       ),
-      //     TODO: 3. Pasang body
+              //TODO: 3. Pasang Body
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              // TODO: 4. Atur mainAxisAligment dan crossAxisAligment
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // TODO: 5. Pasang TextFormField Nama Lengkap
-                TextFormField(
-                  controller: _fullnameController,
-                  decoration: InputDecoration(
-                    labelText: "Nama Lengkap",
-                    border: OutlineInputBorder(),
+              padding: const EdgeInsets.all(16.0),
+            child: Form(
+                child: Column(
+                  // TODO: 4. Atur mainAxisAligment dan crossAxisAligment
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                  // TODO: 5. Pasang TextFormField Nama Lengkap
+                  TextFormField(
+                    controller: _fullnameController,
+                    decoration: InputDecoration(
+                      labelText: "Nama Lengkap",
+                      border: OutlineInputBorder(),
+                    ),
                   ),
+                const SizedBox(
+                  height: 20,
                 ),
                 // TODO: 6. Pasang TextFormField Nama Pengguna
                 SizedBox(height: 20),
@@ -106,15 +132,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 // TODO: 8. Pasang ElevatedButton Sign In
                 SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/signin');
-                  },
-                  child: Text(
-                    'Sign Up',
-                  ),
-                ),
-                // TODO: 9. Pasang ElevatedButton Sign Un
+                ElevatedButton(onPressed:_signUp, child: const Text("Sign Up")),
+                // TODO: 9. Pasang ElevatedButton Sign Up
                 SizedBox(height: 10),
                 RichText(
                   text: TextSpan(
@@ -122,24 +141,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     style: TextStyle(fontSize: 16, color: Colors.deepPurple),
                     children: <TextSpan>[
                       TextSpan(
-                        text: 'Login',
+                        text: 'Masuk di sini.',
                         style: TextStyle(
                             color: Colors.blue,
                             decoration: TextDecoration.underline,
-                            fontSize: 16),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.pushNamed(context, '/signin');
-                          },
+                            fontSize: 16
+                        ),
+                        recognizer: TapGestureRecognizer()..onTap = () {},
                       ),
-                    ],
-                  ),
-                ),
+                    ]))
               ],
             ),
           ),
         ),
-      ),
+      )),
     );
   }
 }
