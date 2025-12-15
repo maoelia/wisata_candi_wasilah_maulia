@@ -19,7 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _errorText = '';
   bool _obscurePassword = true;
 
-  //TODO: 10.Membuat method _signUp
+  //TODO: 10. Membuat method _signUp
   void _signUp() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String name = _fullnameController.text.trim();
@@ -33,31 +33,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
         !password.contains(RegExp(r'[!@#\\\$%^&*(),.?":{}|<>]'))) {
       setState(() {
         _errorText =
-            'Minimal 8 karakter, kombinasi [A-Z], [a-z], [0-9], [!@#\\\$%^&*(),.?":{}|<>]';
+        'Minimal 8 karakter, kombinasi [A-Z], [a-z], [0-9], [!@#\\\$%^&*(),.?":{}|<>]';
       });
       return;
     }
 
+    final encrypt.Key key = encrypt.Key.fromLength(32);
+    final encrypt.IV iv = encrypt.IV.fromLength(16);
+
     // TODO: 3. Jika name, username, password tidak kosong lakukan enkripsi
-    if(name.isNotEmpty && username.isNotEmpty && password.isNotEmpty){
-      final encrypt.Key key = encrypt.Key.fromLength(32);
-      final iv = encrypt.IV.fromLength(16);
+    if (name.isNotEmpty && username.isNotEmpty && password.isNotEmpty) {
+      final encrypter = encrypt.Encrypter(encrypt.AES(key));
+
+      final encryptedName = encrypter.encrypt(name, iv: iv);
+      final encryptedUsername = encrypter.encrypt(username, iv: iv);
+      final encryptedPassword = encrypter.encrypt(password, iv: iv);
+
+      // simpan data pengguna di SharedPreferences
+      prefs.setString('fullname', encryptedName.base64);
+      prefs.setString('username', encryptedUsername.base64);
+      prefs.setString('password', encryptedPassword.base64);
+      prefs.setString('key', key.base64);
+      prefs.setString('iv', iv.base64);
+
+      // buat navigasi ke SignInScreen
+      Navigator.pushReplacementNamed(context, '/signin');
     }
-
-    final encrypter = encrypt.Encrypter(encrypt.AES(key));
-    final encryptedName = encrypter.encrypt(name, iv: iv);
-    final encryptedUsername = encrypter.encrypt(username, iv: iv);
-    final encryptedPassword = encrypter.encrypt(password, iv: iv);
-
-    //simpan data pengguna di SharedPreferences
-    prefs.setString('fullname', encryptedName.base64);
-    prefs.setString('username', encryptedUsername.base64);
-    prefs.setString('password', encryptedPassword.base64);
-    prefs.setString('key', key.base64);
-    prefs.setString('iv', iv.base64);
-
-    //buat navigasi ke SignInScreen
-    Navigator.pushReplacementNamed(context, '/signin');
   }
 
   // TODO: 11. Membuat metode dispose
@@ -76,17 +77,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
       appBar: AppBar(
         title: Text('Sign Up'),
       ),
-              //TODO: 3. Pasang Body
+
+      //TODO: 3. Pasang Body
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-              padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Form(
-                child: Column(
-                  // TODO: 4. Atur mainAxisAligment dan crossAxisAligment
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+              child: Column(
+                // TODO: 4. Atur mainAxisAlignment dan crossAxisAlignment
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
                   // TODO: 5. Pasang TextFormField Nama Lengkap
                   TextFormField(
                     controller: _fullnameController,
@@ -95,66 +97,73 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       border: OutlineInputBorder(),
                     ),
                   ),
-                const SizedBox(
-                  height: 20,
-                ),
-                // TODO: 6. Pasang TextFormField Nama Pengguna
-                SizedBox(height: 20),
-                TextFormField(
-                  controller: _usernameController,
-                  decoration: InputDecoration(
-                    labelText: "Nama Pengguna",
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                // TODO: 7. Pasang TextFormField Kata Sandi
-                SizedBox(height: 20),
-                TextFormField(
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                    labelText: "Kata Sandi",
-                    errorText: _errorText.isNotEmpty ? _errorText : null,
-                    border: OutlineInputBorder(),
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
-                      },
-                      icon: Icon(
-                        _obscurePassword
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                      ),
+                  const SizedBox(height: 20),
+
+                  // TODO: 6. Pasang TextFormField Nama Pengguna
+                  TextFormField(
+                    controller: _usernameController,
+                    decoration: InputDecoration(
+                      labelText: "Nama Pengguna",
+                      border: OutlineInputBorder(),
                     ),
                   ),
-                  obscureText: _obscurePassword,
-                ),
-                // TODO: 8. Pasang ElevatedButton Sign In
-                SizedBox(height: 20),
-                ElevatedButton(onPressed:_signUp, child: const Text("Sign Up")),
-                // TODO: 9. Pasang ElevatedButton Sign Up
-                SizedBox(height: 10),
-                RichText(
-                  text: TextSpan(
-                    text: 'Sudah punya akun? ',
-                    style: TextStyle(fontSize: 16, color: Colors.deepPurple),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'Masuk di sini.',
-                        style: TextStyle(
+                  const SizedBox(height: 20),
+
+                  // TODO: 7. Pasang TextFormField Kata Sandi
+                  TextFormField(
+                    controller: _passwordController,
+                    decoration: InputDecoration(
+                      labelText: "Kata Sandi",
+                      errorText: _errorText.isNotEmpty ? _errorText : null,
+                      border: OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _obscurePassword = !_obscurePassword;
+                          });
+                        },
+                        icon: Icon(
+                          _obscurePassword
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                      ),
+                    ),
+                    obscureText: _obscurePassword,
+                  ),
+                  const SizedBox(height: 20),
+
+                  // TODO: 8. Pasang ElevatedButton Sign Up
+                  ElevatedButton(
+                    onPressed: _signUp,
+                    child: const Text("Sign Up"),
+                  ),
+                  const SizedBox(height: 10),
+
+                  // TODO: 9. Pasang RichText
+                  RichText(
+                    text: TextSpan(
+                      text: 'Sudah punya akun? ',
+                      style: TextStyle(fontSize: 16, color: Colors.deepPurple),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Masuk di sini.',
+                          style: TextStyle(
                             color: Colors.blue,
                             decoration: TextDecoration.underline,
-                            fontSize: 16
+                            fontSize: 16,
+                          ),
+                          recognizer: TapGestureRecognizer()..onTap = () {},
                         ),
-                        recognizer: TapGestureRecognizer()..onTap = () {},
-                      ),
-                    ]))
-              ],
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
-      )),
+      ),
     );
   }
 }
