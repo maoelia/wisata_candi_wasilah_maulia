@@ -25,7 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     //    fullName = 'wasilah maulia';
     //    favoriteCandiCount = 3;
     // });
-    Navigator.pushNamed(context, "/signinscreen");
+    Navigator.pushNamed(context, "/signin");
   }
 
   //6. implementasi fungsi signOut
@@ -37,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       isSignedIn = !isSignedIn;
       userName = '';
       fullName = '';
-    });
+    }); 
   }
 
   void _checkSignInStatus() async {
