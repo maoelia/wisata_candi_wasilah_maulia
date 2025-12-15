@@ -37,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       isSignedIn = !isSignedIn;
       userName = '';
       fullName = '';
-    }); 
+    });
   }
 
   void _checkSignInStatus() async {
